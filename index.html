@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid Mubarak - Special Greeting</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: radial-gradient(circle, #0f2027, #203a43, #2c5364);
+            overflow: hidden;
+            color: white;
+            font-family: 'Amiri', serif;
+            text-align: center;
+            position: relative;
+        }
+        .crescent-moon {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: gold;
+            border-radius: 50%;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            animation: glow 3s infinite alternate, moveUpDown 6s infinite ease-in-out;
+        }
+        .crescent-moon::before {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: #0f2027;
+            border-radius: 50%;
+            top: 10px;
+            left: 25px;
+        }
+        @keyframes glow {
+            0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+            100% { box-shadow: 0 0 30px rgba(255, 215, 0, 1); }
+        }
+        @keyframes moveUpDown {
+            0% { transform: translateX(-50%) translateY(0px); }
+            50% { transform: translateX(-50%) translateY(10px); }
+            100% { transform: translateX(-50%) translateY(0px); }
+        }
+        .container {
+            position: relative;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 100px;
+        }
+        .text {
+            font-size: 2rem;
+            font-weight: normal;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            color: gold;
+        }
+        .name {
+            font-size: 1.2rem;
+            color: gold;
+            opacity: 0;
+            animation: fadeIn 3s forwards 3s;
+            position: relative;
+            z-index: 10;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Falling stars animation */
+        .stars {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: gold;
+            border-radius: 50%;
+            opacity: 0;
+            animation: fall 2.5s linear forwards;
+        }
+        @keyframes fall {
+            0% { opacity: 1; transform: translateY(0px) translateX(0); }
+            100% { opacity: 0; transform: translateY(100px) translateX(20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="crescent-moon"></div>
+    <div class="container">
+        <div class="text">✨ Eid Mubarak ✨</div>
+        <div class="name">- Ghreeeb Professional -</div>
+    </div>
+    <!-- Generating multiple falling stars touching "Ghreeeb Professional" -->
+    <script>
+        function createStars() {
+            let nameElement = document.querySelector('.name');
+            let nameRect = nameElement.getBoundingClientRect();
+
+            for (let i = 0; i < 50; i++) {
+                let star = document.createElement('div');
+                star.classList.add('stars');
+                let x = nameRect.left + Math.random() * nameRect.width;
+                let y = nameRect.top - 20; // Start above the text
+                star.style.left = x + 'px';
+                star.style.top = y + 'px';
+                star.style.animationDelay = Math.random() * 1.5 + 's';
+                document.body.appendChild(star);
+                setTimeout(() => star.remove(), 2500); // Remove stars after animation
+            }
+        }
+        setTimeout(createStars, 3500); // Stars start falling when "Ghreeeb Professional" appears
+    </script>
+</body>
+</html>
